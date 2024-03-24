@@ -1,0 +1,8 @@
+# Insert an Element at the Bottom of a Stack
+
+class Solution:
+    def insertAtBottom(self,st,x):
+        st.insert(0,x)
+        #print(st)
+        
+        return st

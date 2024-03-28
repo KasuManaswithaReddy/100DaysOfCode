@@ -1,0 +1,48 @@
+# City With the Smallest Number of Neighbors at a Threshold Distance problem.
+
+import heapq
+from typing import List
+
+class Solution:
+    def findCity(self, n : int, m : int, edges : List[List[int]], distanceThreshold : int) -> int:
+        # code here
+        graph = {i: [] for i in range(n)}
+        for edge in edges:
+            from_city, to_city, weight = edge
+            graph[from_city].append((to_city, weight))
+            graph[to_city].append((from_city, weight))
+        
+        def dijkstra(source):
+            # Initialize distances to all vertices as infinity
+            distances = [float('inf')] * n
+            distances[source] = 0
+            
+            # Priority queue for Dijkstra's algorithm
+            pq = [(0, source)]  # (distance, vertex)
+            
+            while pq:
+                dist, node = heapq.heappop(pq)
+                
+                # Skip if this node has been visited before with a shorter distance
+                if dist > distances[node]:
+                    continue
+                
+                # Relax edges
+                for neighbor, edge_weight in graph[node]:
+                    new_dist = dist + edge_weight
+                    if new_dist < distances[neighbor]:
+                        distances[neighbor] = new_dist
+                        heapq.heappush(pq, (new_dist, neighbor))
+            
+            return distances
+        
+        min_reachable_cities = float('inf')
+        result_city = -1
+        
+        for city in range(n):
+            reachable_cities = sum(dist <= distanceThreshold for dist in dijkstra(city)) - 1  # Exclude the starting city itself
+            if reachable_cities <= min_reachable_cities:
+                min_reachable_cities = reachable_cities
+                result_city = city
+        
+        return result_city

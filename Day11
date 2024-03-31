@@ -1,0 +1,23 @@
+# Closest Neighbour in BST
+
+#User function Template for python3
+'''
+class Node:
+    """ Class Node """
+    def __init__(self, value):
+        self.left = None
+        self.key = value
+        self.right = None
+'''
+
+class Solution:
+    def findMaxForN(self, root, n):
+        find = -1
+        while(root):
+            if root.key>n:
+                root = root.left
+            else:
+                if root.key<=n:
+                    find=root.key
+                    root=root.right
+        return find

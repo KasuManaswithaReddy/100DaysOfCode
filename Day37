@@ -1,0 +1,46 @@
+#Exit Point in a Matrix
+
+#User function Template for python3
+
+class Solution:
+    def FindExitPoint(self, n, m, matrix):
+        # Code here
+        directions = [(0,1),(1,0),(0,-1),(-1,0)]
+        x,y = 0,0
+        direction_index = 0
+        while True:
+            if x<0 or x>=n or y<0 or y>=m:
+                break
+            
+            if matrix[x][y] == 1:
+                direction_index = (direction_index + 1) % 4
+                matrix[x][y] = 0
+                
+            dx, dy = directions[direction_index]
+            x += dx
+            y += dy
+            
+        return [x - dx, y - dy]
+
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__ == '__main__':
+    T = int(input())
+    for i in range(T):
+        n, m = input().split()
+        n = int(n)
+        m = int(m)
+        matrix = []
+        for _ in range(n):
+            matrix.append(list(map(int, input().split())))
+        ob = Solution()
+        ans = ob.FindExitPoint(n, m, matrix)
+        for _ in ans:
+            print(_, end=" ")
+        print()
+
+# } Driver Code Ends

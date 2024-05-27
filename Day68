@@ -1,0 +1,55 @@
+# Longest subsequence-1
+
+
+from typing import List
+
+class Solution:
+    def longestSubseq(self, n: int, a: List[int]) -> int:
+        # Dictionary to store the length of the longest subsequence ending at each value
+        dp = {}
+        
+        # Initialize the maximum length of subsequence
+        max_length = 0
+        
+        for val in a:
+            # The length of subsequence ending with 'val' will be
+            # max of the lengths of subsequences ending with 'val-1' and 'val+1'
+            dp[val] = max(dp.get(val - 1, 0), dp.get(val + 1, 0)) + 1
+            # Update the maximum length found so far
+            max_length = max(max_length, dp[val])
+        
+        return max_length
+
+
+
+#{ 
+ # Driver Code Starts
+class IntArray:
+
+    def __init__(self) -> None:
+        pass
+
+    def Input(self, n):
+        arr = [int(i) for i in input().strip().split()]  #array input
+        return arr
+
+    def Print(self, arr):
+        for i in arr:
+            print(i, end=" ")
+        print()
+
+
+if __name__ == "__main__":
+    t = int(input())
+    for _ in range(t):
+
+        n = int(input())
+
+        a = IntArray().Input(n)
+
+        obj = Solution()
+        res = obj.longestSubseq(n, a)
+
+        print(res)
+
+# } Driver Code Ends

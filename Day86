@@ -1,0 +1,30 @@
+# Armstrong Numbers
+
+#User function Template for python3
+class Solution:
+    numbers=[None]*(1001)
+    def check(self,n):
+        total,curr=0,n
+        while curr:
+            total+=((curr%10)**3)
+            curr//=10
+        return total==n
+        
+    def armstrongNumber (self, n):
+        if self.numbers[n] is None:
+            self.numbers[n]=self.check(n)
+        return "true" if self.numbers[n] else "false"
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+if __name__ == '__main__':
+    t = int(input())
+    for _ in range(t):
+        n = input()
+        n = int(n)
+        ob = Solution()
+        print(ob.armstrongNumber(n))
+
+# } Driver Code Ends

@@ -1,0 +1,34 @@
+# Compare two fractions
+
+#User function Template for python3
+
+
+class Solution:
+    def compareFrac (self, str):
+        a,b = str.split(", ")          
+        #return a
+        a1,a2 = map(int, a.split("/"))
+        b1,b2 = map(int, b.split("/"))
+        #return (str(a1/a2))
+        if a1/a2 == b1/b2:
+            return "equal"
+        elif a1/a2 > b1/b2:
+            return a
+        return b
+        # code here
+        
+
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+import re
+
+if __name__ == '__main__':
+    ob = Solution()
+    t = int(input())
+    for _ in range(t):
+        str = input()
+        print(ob.compareFrac(str))
+
+# } Driver Code Ends
